@@ -1,3 +1,4 @@
+import 'package:auth0/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth0/flutter_auth0.dart';
 import 'package:http/http.dart' as http;
@@ -85,6 +86,16 @@ class _LoginPageState extends State<LoginPage> {
         }
     }
 
+
+    void _logout() async {
+        try {
+            token = '';
+            showInfo('Logout', "Successfully!");
+        } catch (e) {
+            showInfo('Error', e.toString());
+        }
+    }
+
     @override
     Widget build(BuildContext context) {
         bool canSignIn = (txtUsername.text != null &&
@@ -141,12 +152,21 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                             ],
                         ),
-
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                                MaterialButton(
+                                    color: Colors.red,
+                                    textColor: Colors.white,
+                                    child: const Text('Logout'),
+                                    onPressed: _logout,
+                                ),
+                            ],
+                        )
                     ],
                 ),
+
             ),
         );
     }
-
-
 }
